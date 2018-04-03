@@ -13,7 +13,26 @@ class Menu {
     //  Show player status
     
     func showHomeMenu() -> Void {
-        //  1. New Game
-        //  2. Stop current game
+        //  Creating the game menu
+        print("Bienvenue !\n")
+        print("Veuillez selectionner l'action à effectuer.\n")
+        print("1. Nouvelle partie\n")
+        print("2. Meilleurs scores\n")
+        print("3. Crédits\n\n")
+        
+        //  Choose the option we want
+        //  While the choice is invalid, we repeat the action
+        var userChoice = 0
+        
+        repeat{
+            print("Votre choix : ")
+            if let userInput = readLine(), let choice = Int(userInput) {
+                userChoice = choice
+            }
+        }while (userChoice <= 0 || userChoice > 2)
+        
+        
+        //  TODO : Do the action of choice
+        
     }
 }
