@@ -28,8 +28,10 @@ class Menu {
         
         repeat{
             print("Votre choix : ")
-            if let userInput = readLine(), let choice = Int(userInput) {
+            if let choice = Constants.readInteger() {
                 userChoice = choice
+            }else{
+                print("Choix invalide !\n")
             }
         }while (userChoice <= 0 || userChoice > 3)
         
