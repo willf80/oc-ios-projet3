@@ -8,6 +8,7 @@
 
 import Foundation
 
+//Show game menu
 let menu = Menu()
 menu.showHomeMenu()
 

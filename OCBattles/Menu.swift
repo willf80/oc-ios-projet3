@@ -8,17 +8,19 @@
 
 import Foundation
 
+//  Create game menu
 class Menu {
-    //  Create game menu
-    //  Show player status
+    let game = Game()
     
+    //  This function is called to show game menu
+    //  Entry point
     func showHomeMenu() -> Void {
         //  Creating the game menu
         print("Bienvenue !\n")
         print("Veuillez selectionner l'action à effectuer.\n")
         print("1. Nouvelle partie\n")
-        print("2. Meilleurs scores\n")
-        print("3. Crédits\n\n")
+        print("2. Crédits\n")
+        print("3. Quitter\n\n")
         
         //  Choose the option we want
         //  While the choice is invalid, we repeat the action
@@ -29,10 +31,22 @@ class Menu {
             if let userInput = readLine(), let choice = Int(userInput) {
                 userChoice = choice
             }
-        }while (userChoice <= 0 || userChoice > 2)
+        }while (userChoice <= 0 || userChoice > 3)
         
-        
-        //  TODO : Do the action of choice
-        
+        //  Do the action of choice
+        switch userChoice {
+        case 1:
+            game.startNewGame()
+            break
+        case 2:
+            //  TODO: Game credits
+            break
+            
+        case 3:
+            //  TODO: Quit the game
+            break
+        default:
+            break
+        }
     }
 }
