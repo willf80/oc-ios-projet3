@@ -11,44 +11,51 @@ import Foundation
 //  Create game menu
 class Menu {
     let game = Game()
+    var quitGame = false
     
     //  This function is called to show game menu
     //  Entry point
     func showHomeMenu() -> Void {
+        
         //  Creating the game menu
-        print("Bienvenue !\n")
-        print("Veuillez selectionner l'action à effectuer.\n")
-        print("1. Nouvelle partie\n")
-        print("2. Crédits\n")
-        print("3. Quitter\n\n")
-        
-        //  Choose the option we want
-        //  While the choice is invalid, we repeat the action
-        var userChoice = 0
-        
         repeat{
-            print("Votre choix : ")
-            if let choice = Constants.readInteger() {
-                userChoice = choice
-            }else{
-                print("Choix invalide !\n")
-            }
-        }while (userChoice <= 0 || userChoice > 3)
-        
-        //  Do the action of choice
-        switch userChoice {
-        case 1:
-            game.startNewGame()
-            break
-        case 2:
-            //  TODO: Game credits
-            break
+            print("----- Bienvenue ! -----")
+            print("Veuillez selectionner l'action à effectuer.")
+            print("1. Nouvelle partie")
+            print("2. Crédits")
+            print("3. Quitter")
             
-        case 3:
-            //  TODO: Quit the game
-            break
-        default:
-            break
-        }
+            //  Choose the option we want
+            //  While the choice is invalid, we repeat the action
+            var userChoice = 0
+            
+            repeat{
+                print("Votre choix : ")
+                if let choice = Constants.readInteger() {
+                    userChoice = choice
+                }else{
+                    print("Choix invalide !")
+                }
+            }while (userChoice <= 0 || userChoice > 3)
+            
+            //  Do the action of choice
+            switch userChoice {
+            case 1:
+                game.startNewGame()
+                break
+            case 2:
+                //  TODO: Game credits
+                break
+                
+            case 3:
+                //  Quit the game
+                quitGame = true
+                break
+            default:
+                break
+            }
+        }while !quitGame
+        
+        print("Au revoir !")
     }
 }
