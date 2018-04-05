@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		3F5178752067F68800124FE1 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5178742067F68800124FE1 /* main.swift */; };
 		3F9DFF0220752D1600516660 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9DFF0120752D1600516660 /* Constants.swift */; };
+		3F9DFF042075395100516660 /* Personage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9DFF032075395100516660 /* Personage.swift */; };
+		3F9DFF082075AF9700516660 /* Weapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9DFF072075AF9700516660 /* Weapon.swift */; };
+		3F9DFF0A2075B0AC00516660 /* Fighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9DFF092075B0AC00516660 /* Fighter.swift */; };
+		3F9DFF0C2075B2D700516660 /* Attacker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9DFF0B2075B2D700516660 /* Attacker.swift */; };
+		3F9DFF0E2075B3DA00516660 /* Healer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9DFF0D2075B3DA00516660 /* Healer.swift */; };
 		3FFC891D20742354008391E5 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFC891C20742354008391E5 /* Game.swift */; };
 		3FFC891F2074372A008391E5 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFC891E2074372A008391E5 /* Menu.swift */; };
 /* End PBXBuildFile section */
@@ -29,6 +34,11 @@
 		3F5178712067F68800124FE1 /* OCBattles */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OCBattles; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F5178742067F68800124FE1 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		3F9DFF0120752D1600516660 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		3F9DFF032075395100516660 /* Personage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Personage.swift; sourceTree = "<group>"; };
+		3F9DFF072075AF9700516660 /* Weapon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weapon.swift; sourceTree = "<group>"; };
+		3F9DFF092075B0AC00516660 /* Fighter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fighter.swift; sourceTree = "<group>"; };
+		3F9DFF0B2075B2D700516660 /* Attacker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attacker.swift; sourceTree = "<group>"; };
+		3F9DFF0D2075B3DA00516660 /* Healer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Healer.swift; sourceTree = "<group>"; };
 		3FFC891C20742354008391E5 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		3FFC891E2074372A008391E5 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -63,12 +73,33 @@
 		3F5178732067F68800124FE1 /* OCBattles */ = {
 			isa = PBXGroup;
 			children = (
+				3F9DFF062075AF5300516660 /* Personages */,
+				3F9DFF052075AF3F00516660 /* Weapons */,
 				3F5178742067F68800124FE1 /* main.swift */,
 				3FFC891C20742354008391E5 /* Game.swift */,
 				3FFC891E2074372A008391E5 /* Menu.swift */,
 				3F9DFF0120752D1600516660 /* Constants.swift */,
 			);
 			path = OCBattles;
+			sourceTree = "<group>";
+		};
+		3F9DFF052075AF3F00516660 /* Weapons */ = {
+			isa = PBXGroup;
+			children = (
+				3F9DFF072075AF9700516660 /* Weapon.swift */,
+			);
+			path = Weapons;
+			sourceTree = "<group>";
+		};
+		3F9DFF062075AF5300516660 /* Personages */ = {
+			isa = PBXGroup;
+			children = (
+				3F9DFF032075395100516660 /* Personage.swift */,
+				3F9DFF092075B0AC00516660 /* Fighter.swift */,
+				3F9DFF0B2075B2D700516660 /* Attacker.swift */,
+				3F9DFF0D2075B3DA00516660 /* Healer.swift */,
+			);
+			path = Personages;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -98,7 +129,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "WILLY Falone Kouadio";
 				TargetAttributes = {
 					3F5178702067F68800124FE1 = {
@@ -129,10 +160,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F9DFF0C2075B2D700516660 /* Attacker.swift in Sources */,
+				3F9DFF042075395100516660 /* Personage.swift in Sources */,
 				3FFC891F2074372A008391E5 /* Menu.swift in Sources */,
+				3F9DFF0A2075B0AC00516660 /* Fighter.swift in Sources */,
 				3FFC891D20742354008391E5 /* Game.swift in Sources */,
 				3F5178752067F68800124FE1 /* main.swift in Sources */,
 				3F9DFF0220752D1600516660 /* Constants.swift in Sources */,
+				3F9DFF082075AF9700516660 /* Weapon.swift in Sources */,
+				3F9DFF0E2075B3DA00516660 /* Healer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,6 +189,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -160,6 +197,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -210,6 +248,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -217,6 +256,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;

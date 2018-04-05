@@ -11,10 +11,9 @@ import Foundation
 class Game {
     
     //  Indicates whether the game is over or not
-    var quit = false
+    private var quit = false
     
     func startNewGame() -> Void {
-        
         //  Loop of game
         //  Do not quit while new part is not ended
         //  The end of the game may be due to the fact that:
