@@ -7,7 +7,7 @@
 //
 
 class PersonageHealer: Personage, Healer {
-    private init(name: String, life: Int, weapon: WeaponCare) {
+    init(name: String, life: Int, weapon: WeaponCare) {
         super.init(name: name, life: life, weapon: weapon)
     }
     

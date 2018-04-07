@@ -7,7 +7,7 @@
 //
 
 class PersonageAttacker: Personage, Attacker {
-    private init(name: String, life: Int, weapon: WeaponAttack) {
+    init(name: String, life: Int, weapon: WeaponAttack) {
         super.init(name: name, life: life, weapon: weapon)
     }
     

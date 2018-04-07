@@ -8,8 +8,8 @@
 
 import Foundation
 
-//All IDs of the weapons to make the source code easily readable
-enum WeaponNameID: String{
+//  All IDs of the weapons to make the source code easily readable
+enum WeaponID: String{
     case EPEE = "EPEE"
     case CARE_SHEET = "CARE_SHEET"
     case CUDGEL = "CUDGEL"
@@ -18,10 +18,17 @@ enum WeaponNameID: String{
 
 class Constants {
     //  Define all available weapons
-    static let WeaponStore = [WeaponNameID.EPEE.rawValue : WeaponAttack(name: "Epée", damage: 10),
-                              WeaponNameID.CARE_SHEET.rawValue : WeaponCare(name: "Feuille de soin", care: 6),
-                              WeaponNameID.CUDGEL.rawValue : WeaponAttack(name: "Gourdin", damage: 3),
-                              WeaponNameID.AXE.rawValue : WeaponAttack(name: "Hache", damage: 7)]
+    static let WeaponStore = [WeaponID.EPEE.rawValue : WeaponAttack(name: "Epée", damage: 10),
+                              WeaponID.CARE_SHEET.rawValue : WeaponCare(name: "Feuille de soin", care: 8),
+                              WeaponID.CUDGEL.rawValue : WeaponAttack(name: "Gourdin", damage: 5),
+                              WeaponID.AXE.rawValue : WeaponAttack(name: "Hache", damage: 15)]
+    
+    //  Definition of all personages without their name
+    //  Name can be modified after
+    static let PersonageStore = ["FIGTHER" : PersonageAttacker(name: "Combattant", life: 100, weapon: WeaponStore[WeaponID.EPEE.rawValue] as! WeaponAttack),
+                                 "COLOSSUS" : PersonageAttacker(name: "Colosse", life: 190, weapon: WeaponStore[WeaponID.CUDGEL.rawValue] as! WeaponAttack),
+                                 "DWARF" : PersonageAttacker(name: "Dwarf", life: 60, weapon: WeaponStore[WeaponID.AXE.rawValue] as! WeaponAttack),
+                                 "MAGE" : PersonageHealer(name: "Mage", life: 120, weapon: WeaponStore[WeaponID.CARE_SHEET.rawValue] as! WeaponCare)]
     
     //  Read integer line
     static func readInteger() -> Int? {
