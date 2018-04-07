@@ -14,6 +14,11 @@
 		3F9DFF0A2075B0AC00516660 /* Fighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9DFF092075B0AC00516660 /* Fighter.swift */; };
 		3F9DFF0C2075B2D700516660 /* Attacker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9DFF0B2075B2D700516660 /* Attacker.swift */; };
 		3F9DFF0E2075B3DA00516660 /* Healer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9DFF0D2075B3DA00516660 /* Healer.swift */; };
+		3F9DFF1020761EAB00516660 /* PersonageAttacker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9DFF0F20761EAB00516660 /* PersonageAttacker.swift */; };
+		3F9DFF1220761FBA00516660 /* PersonageHealer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9DFF1120761FBA00516660 /* PersonageHealer.swift */; };
+		3F9DFF142076214100516660 /* Mage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9DFF132076214100516660 /* Mage.swift */; };
+		3F9DFF1620785FEE00516660 /* WeaponAttack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9DFF1520785FEE00516660 /* WeaponAttack.swift */; };
+		3F9DFF182078603300516660 /* WeaponCare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9DFF172078603300516660 /* WeaponCare.swift */; };
 		3FFC891D20742354008391E5 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFC891C20742354008391E5 /* Game.swift */; };
 		3FFC891F2074372A008391E5 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFC891E2074372A008391E5 /* Menu.swift */; };
 /* End PBXBuildFile section */
@@ -39,6 +44,11 @@
 		3F9DFF092075B0AC00516660 /* Fighter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fighter.swift; sourceTree = "<group>"; };
 		3F9DFF0B2075B2D700516660 /* Attacker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attacker.swift; sourceTree = "<group>"; };
 		3F9DFF0D2075B3DA00516660 /* Healer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Healer.swift; sourceTree = "<group>"; };
+		3F9DFF0F20761EAB00516660 /* PersonageAttacker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonageAttacker.swift; sourceTree = "<group>"; };
+		3F9DFF1120761FBA00516660 /* PersonageHealer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonageHealer.swift; sourceTree = "<group>"; };
+		3F9DFF132076214100516660 /* Mage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mage.swift; sourceTree = "<group>"; };
+		3F9DFF1520785FEE00516660 /* WeaponAttack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponAttack.swift; sourceTree = "<group>"; };
+		3F9DFF172078603300516660 /* WeaponCare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponCare.swift; sourceTree = "<group>"; };
 		3FFC891C20742354008391E5 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		3FFC891E2074372A008391E5 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -87,6 +97,8 @@
 			isa = PBXGroup;
 			children = (
 				3F9DFF072075AF9700516660 /* Weapon.swift */,
+				3F9DFF1520785FEE00516660 /* WeaponAttack.swift */,
+				3F9DFF172078603300516660 /* WeaponCare.swift */,
 			);
 			path = Weapons;
 			sourceTree = "<group>";
@@ -98,6 +110,9 @@
 				3F9DFF092075B0AC00516660 /* Fighter.swift */,
 				3F9DFF0B2075B2D700516660 /* Attacker.swift */,
 				3F9DFF0D2075B3DA00516660 /* Healer.swift */,
+				3F9DFF0F20761EAB00516660 /* PersonageAttacker.swift */,
+				3F9DFF1120761FBA00516660 /* PersonageHealer.swift */,
+				3F9DFF132076214100516660 /* Mage.swift */,
 			);
 			path = Personages;
 			sourceTree = "<group>";
@@ -160,13 +175,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F9DFF182078603300516660 /* WeaponCare.swift in Sources */,
 				3F9DFF0C2075B2D700516660 /* Attacker.swift in Sources */,
 				3F9DFF042075395100516660 /* Personage.swift in Sources */,
 				3FFC891F2074372A008391E5 /* Menu.swift in Sources */,
+				3F9DFF142076214100516660 /* Mage.swift in Sources */,
 				3F9DFF0A2075B0AC00516660 /* Fighter.swift in Sources */,
 				3FFC891D20742354008391E5 /* Game.swift in Sources */,
 				3F5178752067F68800124FE1 /* main.swift in Sources */,
 				3F9DFF0220752D1600516660 /* Constants.swift in Sources */,
+				3F9DFF1220761FBA00516660 /* PersonageHealer.swift in Sources */,
+				3F9DFF1020761EAB00516660 /* PersonageAttacker.swift in Sources */,
+				3F9DFF1620785FEE00516660 /* WeaponAttack.swift in Sources */,
 				3F9DFF082075AF9700516660 /* Weapon.swift in Sources */,
 				3F9DFF0E2075B3DA00516660 /* Healer.swift in Sources */,
 			);
