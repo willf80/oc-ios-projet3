@@ -18,4 +18,8 @@ class Personage {
         self.weapon = weapon
         self.maxLife = life
     }
+    
+    func isDead() -> Bool {
+        return life <= 0
+    }
 }

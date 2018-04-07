@@ -16,7 +16,7 @@ enum WeaponID: String{
     case AXE = "AXE"
 }
 
-class Constants {
+struct Constants {
     //  Define all available weapons
     static let WeaponStore = [WeaponID.EPEE.rawValue : WeaponAttack(name: "Epée", damage: 10),
                               WeaponID.CARE_SHEET.rawValue : WeaponCare(name: "Feuille de soin", care: 8),
