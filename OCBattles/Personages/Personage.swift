@@ -8,12 +8,14 @@
 
 class Personage {
     var life:Int
+    let maxLife:Int
     var name:String
     var weapon: Weapon
     
-    init(name: String, life:Int, weapon: Weapon) {
+    private init(name: String, life:Int, weapon: Weapon) {
         self.name = name
         self.life = life
         self.weapon = weapon
+        self.maxLife = life
     }
 }

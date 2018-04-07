@@ -7,5 +7,5 @@
 //
 
 protocol Healer {
-    func cure(personage: Personage, life: Int)
+    func cure(personage: Personage, giveCare care: Int)
 }
