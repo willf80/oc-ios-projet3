@@ -6,12 +6,17 @@
 //  Copyright © 2018 WILLY Falone Kouadio. All rights reserved.
 //
 
+enum CurrentPlayer {
+    case Player1
+    case Player2
+}
+
 class Player {
     var name : String
     var listOfPersonageSelected = [Personage]()
     
-    init(name: String) {
-        self.name = name
+    init() {
+        self.name = ""
     }
     
     func won() -> Bool {

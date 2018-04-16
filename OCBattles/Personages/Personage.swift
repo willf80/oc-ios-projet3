@@ -12,7 +12,7 @@ class Personage {
     var name:String
     var weapon: Weapon
     
-    private init(name: String, life:Int, weapon: Weapon) {
+    init(name: String, life:Int, weapon: Weapon) {
         self.name = name
         self.life = life
         self.weapon = weapon

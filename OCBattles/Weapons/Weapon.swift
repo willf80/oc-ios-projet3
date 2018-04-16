@@ -9,7 +9,7 @@
 class Weapon {
     var name:String
     
-    private init(name:String) {
+    init(name:String) {
         self.name = name
     }
 }
