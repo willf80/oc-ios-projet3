@@ -19,16 +19,29 @@ class Player {
         self.name = ""
     }
     
-    func won() -> Bool {
-        var isWon = true
+    func getPersonageWithoutHealer() -> [Personage] {
+        var listPersonage = [Personage]()
+        for personage in listOfPersonageSelected {
+            if personage is PersonageHealer{
+                continue
+            }
+            
+            listPersonage += [personage]
+        }
+        
+        return listPersonage
+    }
+    
+    func isAllPersonageAreDead() -> Bool {
+        var isDead = true
         
         for personage in listOfPersonageSelected {
             if !personage.isDead() {
-                isWon = false
+                isDead = false
                 break
             }
         }
         
-        return isWon
+        return isDead
     }
 }

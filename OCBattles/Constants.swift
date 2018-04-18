@@ -41,6 +41,4 @@ struct Constants {
         
         return input
     }
-    
-    
 }
