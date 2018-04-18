@@ -23,12 +23,13 @@ struct Constants {
                               WeaponID.CUDGEL.rawValue : WeaponAttack(name: "Gourdin", damage: 5),
                               WeaponID.AXE.rawValue : WeaponAttack(name: "Hache", damage: 15)]
     
-    //  Definition of all personages without their name
-    //  Name can be modified after
-    static let PersonageStore = ["FIGTHER" : PersonageAttacker(name: "", life: 100, weapon: WeaponStore[WeaponID.EPEE.rawValue] as! WeaponAttack),
-                                 "COLOSSUS" : PersonageAttacker(name: "", life: 190, weapon: WeaponStore[WeaponID.CUDGEL.rawValue] as! WeaponAttack),
-                                 "DWARF" : PersonageAttacker(name: "", life: 60, weapon: WeaponStore[WeaponID.AXE.rawValue] as! WeaponAttack),
-                                 "MAGE" : PersonageHealer(name: "", life: 120, weapon: WeaponStore[WeaponID.CARE_SHEET.rawValue] as! WeaponCare)]
+    //  Definition of all personages without their pseudoName
+    static func getAllPersonageStore() -> [Personage] {
+        return [PersonageAttacker(name: "Combattant", life: 100, weapon: WeaponStore[WeaponID.EPEE.rawValue] as! WeaponAttack),
+               PersonageAttacker(name: "Colosse", life: 190, weapon: WeaponStore[WeaponID.CUDGEL.rawValue] as! WeaponAttack),
+               PersonageAttacker(name: "Nain", life: 60, weapon: WeaponStore[WeaponID.AXE.rawValue] as! WeaponAttack),
+               PersonageHealer(name: "Mage", life: 120, weapon: WeaponStore[WeaponID.CARE_SHEET.rawValue] as! WeaponCare)]
+    }
     
     //  Read integer line
     static func readInteger() -> Int? {
@@ -40,5 +41,6 @@ struct Constants {
         
         return input
     }
+    
     
 }

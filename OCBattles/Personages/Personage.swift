@@ -10,6 +10,7 @@ class Personage {
     var life:Int
     let maxLife:Int
     var name:String
+    var pseudoName:String?
     var weapon: Weapon
     
     init(name: String, life:Int, weapon: Weapon) {
