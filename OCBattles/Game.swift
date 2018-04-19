@@ -67,7 +67,7 @@ class Game {
                 
                 //Show player list without Mage
                 //Because the mage can not heal himself or another mage
-                showPlayerPersonageList(listOfPersonage: currentPlayer.getPersonageWithoutHealer(), title: "Liste des personnes à soigner de [\(currentPlayer.name)] : ")
+                showPlayerPersonageList(listOfPersonage: currentPlayer.getPersonageWithoutHealer(), headerMessage: "Liste des personnes à soigner de [\(currentPlayer.name)] : ")
                 
                 //Check if personage to care is not dead
                 var personageToCare = takeCurrentPlayerPersonage(listOfPersonage: currentPlayer.getPersonageWithoutHealer())
@@ -90,7 +90,7 @@ class Game {
                 let personageAttacker = playerPersonageSelectedForAttackOrCare as! PersonageAttacker
                 
                 //Show opposite player list
-                showPlayerPersonageList(listOfPersonage: currentPlayer.listOfPersonageSelected, title: "Liste des personnes à attacker de [\(oppositePlayer.name)] : ")
+                showPlayerPersonageList(listOfPersonage: currentPlayer.listOfPersonageSelected, headerMessage: "Liste des personnes à attacker de [\(oppositePlayer.name)] : ")
                 var personageAttacked = takeCurrentPlayerPersonage(listOfPersonage: oppositePlayer.listOfPersonageSelected)
                 if(personageAttacked.isDead()){
                     print("Le personage est mort. Choisissez un autre")
@@ -187,9 +187,9 @@ class Game {
         }
     }
     
-    private func showPlayerPersonageList(listOfPersonage: [Personage], title: String) -> Void{
+    private func showPlayerPersonageList(listOfPersonage: [Personage], headerMessage: String) -> Void{
         print("------------------")
-        print(title)
+        print(headerMessage)
         print("")
         for i in 0..<listOfPersonage.count {
             let personage = listOfPersonage[i]
@@ -271,7 +271,7 @@ class Game {
     
     //  Check if the name is not used in both player list
     private func checkIfPseudoNameIsUsed(pseudoName: String) -> Bool{
-        return checkIfPseudoNameIsUsedInPlayer(pseudoName: pseudoName, player: player1) &&
+        return checkIfPseudoNameIsUsedInPlayer(pseudoName: pseudoName, player: player1) ||
             checkIfPseudoNameIsUsedInPlayer(pseudoName: pseudoName, player: player2)
     }
     
