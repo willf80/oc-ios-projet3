@@ -21,21 +21,23 @@ class Game {
     
     func startNewGame() -> Void {
         
+        print("\n\n============= DEFINITION DES EQUIPES =============")
+        
         //  Define player name
        teamDefinition()
         
+        print("\n\n============= CHOIX DES PERSONNAGES =============")
         //  Personage selection
         selectPlayerPersonage(currentPlayer: .Player1)
         selectPlayerPersonage(currentPlayer: .Player2)
         
         makePause()
-        recapitulationPlayersList()
         
         print("\n\n============= COMBAT =============")
         goInCombat()
     }
     
-    func makePause() -> Void{
+    private func makePause() -> Void{
         print("\nAppuyer sur entrer pour continuer...")
         _ = readLine() //Just to put application in pause
     }
@@ -47,17 +49,23 @@ class Game {
         //  - One of the two players wins the game
         //  - One of the players decides to stop the game
         repeat {
-            let currentPlayer = selectCurrentPlayer(currentPlayer: self.currentPlayer)
-            let oppositePlayer = determinationOfTheOppositePlayer()
+            let currentPlayerSelected = getCurrentPlayer(currentPlayer: self.currentPlayer)
+            let oppositePlayer = getTheOppositePlayer()
             
             //Give the list of the characters of the opposing team with the useful properties, so that the player can make an informed choice!
-            print("\n\n******* Au tour de l'équipe [\(currentPlayer.name)] *******")
-            showPlayerPersonageList(player: oppositePlayer)
+            print("\n\n******* Au tour de l'équipe [\(currentPlayerSelected.name)] *******")
+            oppositePlayer.showTeamListWithDetails()
             
-            print("\nVeillez selectionner un personnage [\(currentPlayer.name)] : ")
-            showPlayerPersonageList(player: currentPlayer)
+            print("\nVeillez selectionner un personnage [\(currentPlayerSelected.name)] : ")
+            currentPlayerSelected.showTeamListWithDetails()
             
-            let playerPersonageSelectedForAttackOrCare = takeCurrentPlayerPersonage(listOfPersonage: currentPlayer.listOfPersonageSelected)
+            var playerPersonageSelectedForAttackOrCare = takeCurrentPlayerPersonage(listOfPersonage: currentPlayerSelected.listOfPersonageSelected)
+            if playerPersonageSelectedForAttackOrCare.isDead(){
+                repeat{
+                    print("Le personnage est mort. Choisissez un autre")
+                    playerPersonageSelectedForAttackOrCare = takeCurrentPlayerPersonage(listOfPersonage: currentPlayerSelected.listOfPersonageSelected)
+                }while playerPersonageSelectedForAttackOrCare.isDead()
+            }
             
             //Check if is Attacker or Healer
             //--------------------------------------
@@ -67,14 +75,14 @@ class Game {
                 
                 //Show player list without Mage
                 //Because the mage can not heal himself or another mage
-                showPlayerPersonageList(listOfPersonage: currentPlayer.getPersonageWithoutHealer(), headerMessage: "Liste des personnes à soigner de [\(currentPlayer.name)] : ")
+                currentPlayerSelected.showTeamListWithoutHealer(headerMessage: "Liste des personnages à soigner de [\(currentPlayerSelected.name)] : ")
                 
                 //Check if personage to care is not dead
-                var personageToCare = takeCurrentPlayerPersonage(listOfPersonage: currentPlayer.getPersonageWithoutHealer())
+                var personageToCare = takeCurrentPlayerPersonage(listOfPersonage: currentPlayerSelected.getPersonageWithoutHealer())
                 if(personageToCare.isDead()){
-                    print("Le personage est mort. Choisissez un autre")
                     repeat{
-                        personageToCare = takeCurrentPlayerPersonage(listOfPersonage: currentPlayer.getPersonageWithoutHealer())
+                        print("Le personnage est mort. Choisissez un autre")
+                        personageToCare = takeCurrentPlayerPersonage(listOfPersonage: currentPlayerSelected.getPersonageWithoutHealer())
                     }while personageToCare.isDead()
                 }
                 
@@ -82,19 +90,20 @@ class Game {
                 let weaponCare = personageHealer.weapon as! WeaponCare
                 personageHealer.cure(personage: personageToCare, giveCare: weaponCare.care)
                 
-                print("\n-> \(personageHealer.pseudoName!) à soigné \(personageToCare.pseudoName!) de \(weaponCare.care) vies\n")
+                print("\n-> \(personageHealer.pseudoName!) à soigné \(personageToCare.pseudoName!) avec un(e) \(weaponCare.name) de \(weaponCare.care) vies\n")
                 
                 //Show recap
-                showPlayerPersonageList(player: currentPlayer)
+                currentPlayerSelected.showTeamListWithDetails()
             }else{
                 let personageAttacker = playerPersonageSelectedForAttackOrCare as! PersonageAttacker
                 
                 //Show opposite player list
-                showPlayerPersonageList(listOfPersonage: currentPlayer.listOfPersonageSelected, headerMessage: "Liste des personnes à attacker de [\(oppositePlayer.name)] : ")
+                oppositePlayer.showTeamListWithDetails(headerMessage: "Liste des personnages à attacker de [\(oppositePlayer.name)] : ")
+                
                 var personageAttacked = takeCurrentPlayerPersonage(listOfPersonage: oppositePlayer.listOfPersonageSelected)
                 if(personageAttacked.isDead()){
-                    print("Le personage est mort. Choisissez un autre")
                     repeat{
+                        print("Le personnage est mort. Choisissez un autre")
                         personageAttacked = takeCurrentPlayerPersonage(listOfPersonage: oppositePlayer.listOfPersonageSelected)
                     }while personageAttacked.isDead()
                 }
@@ -103,15 +112,17 @@ class Game {
                 let weaponAttack = personageAttacker.weapon as! WeaponAttack
                 personageAttacker.attack(personage: personageAttacked, damage: weaponAttack.damage)
                 
-                print("\n-> \(personageAttacker.pseudoName!) a attacké(e) \(personageAttacked.pseudoName!) avec \(weaponAttack.name). \(weaponAttack.damage) vies retirée\n")
+                print("\n-> \(personageAttacker.pseudoName!) a attacké(e) \(personageAttacked.pseudoName!) avec un(e) \(weaponAttack.name). \(weaponAttack.damage) vies retirée\n")
                 
                 //Show recap
-                showPlayerPersonageList(player: oppositePlayer)
+                oppositePlayer.showTeamListWithDetails()
             }
             
             if oppositePlayer.isAllPersonageAreDead() {
+                print("\n\n=============================")
                 print("l'équipe [\(oppositePlayer.name)] à perdue tous ces personnages !")
-                print("**** Bravo \(currentPlayer.name) ! Vous avez remporté la partie ****")
+                print("**** Bravo \(currentPlayerSelected.name) ! Vous avez remporté la partie ****")
+                print("=============================")
                 quit = true
             }
             
@@ -121,7 +132,7 @@ class Game {
         }while !quit
     }
     
-    private func determinationOfTheOppositePlayer() -> Player {
+    private func getTheOppositePlayer() -> Player {
         if currentPlayer == .Player1{
             return player2
         }else{
@@ -129,7 +140,7 @@ class Game {
         }
     }
     
-    func toggleCurrentPlayer() -> Void {
+    private func toggleCurrentPlayer() -> Void {
         if currentPlayer == .Player1{
             currentPlayer = .Player2
         }else{
@@ -137,7 +148,7 @@ class Game {
         }
     }
     
-    func takeCurrentPlayerPersonage(listOfPersonage: [Personage]) -> Personage {
+    private func takeCurrentPlayerPersonage(listOfPersonage: [Personage]) -> Personage {
         var choice = 0
         repeat{
             print("Votre choix : ")
@@ -151,60 +162,19 @@ class Game {
         return listOfPersonage[choice - 1]
     }
     
-    private func recapitulationPlayersList() -> Void {
-        print("\nListe des équipes")
-        print("#############################\n")
-        
-        print("Equipe \(player1.name)")
-        showPlayerPersonageList(player: player1)
-        
-        print("")
-        
-        print("Equipe \(player2.name)")
-        showPlayerPersonageList(player: player2)
-    }
+//    private func recapitulationPlayersList() -> Void {
+//        print("\nListe des équipes")
+//        print("#############################\n")
+//
+//        print("Equipe \(player1.name)")
+//        player1.showTeamListWithDetails()
+//        print("")
+//
+//        print("Equipe \(player2.name)")
+//        player2.showTeamListWithDetails()
+//    }
     
-    private func showPlayerPersonageList(player: Player) -> Void{
-        print("------------------")
-        print("Liste de l'équipe [\(player.name)]")
-        for i in 0..<player.listOfPersonageSelected.count {
-            let personage = player.listOfPersonageSelected[i]
-            
-            var text = ""
-            if personage.weapon is WeaponAttack{
-                let weaponAttack = personage.weapon as! WeaponAttack
-                text = "\(i+1). \(personage.pseudoName!) [Vie : \(personage.life), \(weaponAttack.name) : \(weaponAttack.damage)]"
-            }else{
-                let weaponCare = personage.weapon as! WeaponCare
-                text = "\(i+1). \(personage.pseudoName!) [Vie : \(personage.life), \(weaponCare.name) : \(weaponCare.care)]"
-            }
-            
-            if(personage.isDead()){
-                text += "(MORT)"
-            }
-            
-            print(text)
-        }
-    }
-    
-    private func showPlayerPersonageList(listOfPersonage: [Personage], headerMessage: String) -> Void{
-        print("------------------")
-        print(headerMessage)
-        print("")
-        for i in 0..<listOfPersonage.count {
-            let personage = listOfPersonage[i]
-            
-            if personage.weapon is WeaponAttack{
-                let weaponAttack = personage.weapon as! WeaponAttack
-                print("\(i+1). \(personage.pseudoName!) [Vie : \(personage.life), \(weaponAttack.name) : \(weaponAttack.damage)]")
-            }else{
-                let weaponCare = personage.weapon as! WeaponCare
-                print("\(i+1). \(personage.pseudoName!) [Vie : \(personage.life), \(weaponCare.name) : \(weaponCare.care)]")
-            }
-        }
-    }
-    
-    func selectCurrentPlayer(currentPlayer: CurrentPlayer) -> Player {
+    private func getCurrentPlayer(currentPlayer: CurrentPlayer) -> Player {
         var player: Player
         
         if currentPlayer == .Player1{
@@ -219,7 +189,7 @@ class Game {
     private func selectPlayerPersonage(currentPlayer: CurrentPlayer) -> Void {
         var totalSelection = 0
         
-        let player = selectCurrentPlayer(currentPlayer: currentPlayer)
+        let player = getCurrentPlayer(currentPlayer: currentPlayer)
         
         print("\n------------------\n")
         print("Choix des personnages de [\(player.name)]")
@@ -248,7 +218,7 @@ class Game {
             }
         }while totalSelection < 3
         
-        showPlayerPersonageList(player: player)
+        player.showTeamListWithDetails()
     }
     
     private func editPersonageName(personage: Personage) -> Void{
@@ -260,7 +230,7 @@ class Game {
                 
                 nameIsUsed = checkIfPseudoNameIsUsed(pseudoName: personage.pseudoName!)
                 if nameIsUsed {
-                    print("[\(pseudoName)] est déjà utilisé. Merci de saisir un autre nom")
+                    print("[\(pseudoName)] est déjà utilisé.")
                 }
             }else{
                 print("Nom invalide")

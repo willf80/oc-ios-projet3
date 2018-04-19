@@ -19,16 +19,16 @@ enum WeaponID: String{
 struct Constants {
     //  Define all available weapons
     static let WeaponStore = [WeaponID.EPEE.rawValue : WeaponAttack(name: "Epée", damage: 10),
-                              WeaponID.CARE_SHEET.rawValue : WeaponCare(name: "Feuille de soin", care: 8),
-                              WeaponID.CUDGEL.rawValue : WeaponAttack(name: "Gourdin", damage: 5),
+                              WeaponID.CARE_SHEET.rawValue : WeaponCare(name: "Feuille de soin", care: 12),
+                              WeaponID.CUDGEL.rawValue : WeaponAttack(name: "Gourdin", damage: 8),
                               WeaponID.AXE.rawValue : WeaponAttack(name: "Hache", damage: 15)]
     
     //  Definition of all personages without their pseudoName
     static func getAllPersonageStore() -> [Personage] {
         return [PersonageAttacker(name: "Combattant", life: 100, weapon: WeaponStore[WeaponID.EPEE.rawValue] as! WeaponAttack),
-               PersonageAttacker(name: "Colosse", life: 190, weapon: WeaponStore[WeaponID.CUDGEL.rawValue] as! WeaponAttack),
-               PersonageAttacker(name: "Nain", life: 60, weapon: WeaponStore[WeaponID.AXE.rawValue] as! WeaponAttack),
-               PersonageHealer(name: "Mage", life: 120, weapon: WeaponStore[WeaponID.CARE_SHEET.rawValue] as! WeaponCare)]
+               PersonageAttacker(name: "Colosse", life: 110, weapon: WeaponStore[WeaponID.CUDGEL.rawValue] as! WeaponAttack),
+               PersonageAttacker(name: "Nain", life: 50, weapon: WeaponStore[WeaponID.AXE.rawValue] as! WeaponAttack),
+               PersonageHealer(name: "Mage", life: 40, weapon: WeaponStore[WeaponID.CARE_SHEET.rawValue] as! WeaponCare)]
     }
     
     //  Read integer line
