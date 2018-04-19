@@ -14,6 +14,8 @@ enum WeaponID: String{
     case CARE_SHEET = "CARE_SHEET"
     case CUDGEL = "CUDGEL"
     case AXE = "AXE"
+    case MICROBE = "MICROBE"
+    case POISON = "POISON"
 }
 
 struct Constants {
@@ -21,6 +23,8 @@ struct Constants {
     static let WeaponStore = [WeaponID.EPEE.rawValue : WeaponAttack(name: "Epée", damage: 10),
                               WeaponID.CARE_SHEET.rawValue : WeaponCare(name: "Feuille de soin", care: 12),
                               WeaponID.CUDGEL.rawValue : WeaponAttack(name: "Gourdin", damage: 8),
+                              WeaponID.MICROBE.rawValue : WeaponAttack(name: "Poignard-machette", damage: 17),
+                              WeaponID.POISON.rawValue : WeaponAttack(name: "Poison", damage: 13),
                               WeaponID.AXE.rawValue : WeaponAttack(name: "Hache", damage: 15)]
     
     //  Definition of all personages without their pseudoName
@@ -28,6 +32,8 @@ struct Constants {
         return [PersonageAttacker(name: "Combattant", life: 100, weapon: WeaponStore[WeaponID.EPEE.rawValue] as! WeaponAttack),
                PersonageAttacker(name: "Colosse", life: 110, weapon: WeaponStore[WeaponID.CUDGEL.rawValue] as! WeaponAttack),
                PersonageAttacker(name: "Nain", life: 50, weapon: WeaponStore[WeaponID.AXE.rawValue] as! WeaponAttack),
+               PersonageAttacker(name: "Microbe", life: 90, weapon: WeaponStore[WeaponID.MICROBE.rawValue] as! WeaponAttack),
+               PersonageAttacker(name: "Assain", life: 90, weapon: WeaponStore[WeaponID.POISON.rawValue] as! WeaponAttack),
                PersonageHealer(name: "Mage", life: 40, weapon: WeaponStore[WeaponID.CARE_SHEET.rawValue] as! WeaponCare)]
     }
     

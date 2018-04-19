@@ -13,13 +13,20 @@ class Game {
     //  Player1 is the first player start a game
     private var currentPlayer = CurrentPlayer.Player1
     
-    private let player1 = Player()
-    private let player2 = Player()
+    private var player1 = Player()
+    private var player2 = Player()
     
     //  Indicates whether the game is over or not
     private var quit = false
     
+    private func initialize() -> Void {
+        player1 = Player()
+        player2 = Player()
+        currentPlayer = CurrentPlayer.Player1
+    }
+    
     func startNewGame() -> Void {
+        initialize()
         
         print("\n\n============= DEFINITION DES EQUIPES =============")
         
