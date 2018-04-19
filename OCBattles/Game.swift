@@ -51,7 +51,7 @@ class Game {
             let oppositePlayer = determinationOfTheOppositePlayer()
             
             //Give the list of the characters of the opposing team with the useful properties, so that the player can make an informed choice!
-            print("\n\n******* Autour de l'équipe [\(currentPlayer.name)] *******")
+            print("\n\n******* Au tour de l'équipe [\(currentPlayer.name)] *******")
             showPlayerPersonageList(player: oppositePlayer)
             
             print("\nVeillez selectionner un personnage [\(currentPlayer.name)] : ")
@@ -60,13 +60,13 @@ class Game {
             let playerPersonageSelectedForAttackOrCare = takeCurrentPlayerPersonage(listOfPersonage: currentPlayer.listOfPersonageSelected)
             
             //Check if is Attacker or Healer
-            //-------
+            //--------------------------------------
             //If is Healer, we show current player personage
             if playerPersonageSelectedForAttackOrCare is Healer{
                 let personageHealer = playerPersonageSelectedForAttackOrCare as! PersonageHealer
                 
                 //Show player list without Mage
-                //Because Mage can not care him or an other Mage
+                //Because the mage can not heal himself or another mage
                 showPlayerPersonageList(listOfPersonage: currentPlayer.getPersonageWithoutHealer(), title: "Liste des personnes à soigner de [\(currentPlayer.name)] : ")
                 
                 //Check if personage to care is not dead
@@ -78,7 +78,7 @@ class Game {
                     }while personageToCare.isDead()
                 }
                 
-                //  Get personage healer weapon
+                //Get personage healer weapon
                 let weaponCare = personageHealer.weapon as! WeaponCare
                 personageHealer.cure(personage: personageToCare, giveCare: weaponCare.care)
                 
@@ -87,7 +87,26 @@ class Game {
                 //Show recap
                 showPlayerPersonageList(player: currentPlayer)
             }else{
+                let personageAttacker = playerPersonageSelectedForAttackOrCare as! PersonageAttacker
                 
+                //Show opposite player list
+                showPlayerPersonageList(listOfPersonage: currentPlayer.listOfPersonageSelected, title: "Liste des personnes à attacker de [\(oppositePlayer.name)] : ")
+                var personageAttacked = takeCurrentPlayerPersonage(listOfPersonage: oppositePlayer.listOfPersonageSelected)
+                if(personageAttacked.isDead()){
+                    print("Le personage est mort. Choisissez un autre")
+                    repeat{
+                        personageAttacked = takeCurrentPlayerPersonage(listOfPersonage: oppositePlayer.listOfPersonageSelected)
+                    }while personageAttacked.isDead()
+                }
+                
+                //Get personage attacker weapon
+                let weaponAttack = personageAttacker.weapon as! WeaponAttack
+                personageAttacker.attack(personage: personageAttacked, damage: weaponAttack.damage)
+                
+                print("\n-> \(personageAttacker.pseudoName!) a attacké(e) \(personageAttacked.pseudoName!) avec \(weaponAttack.name). \(weaponAttack.damage) vies retirée\n")
+                
+                //Show recap
+                showPlayerPersonageList(player: oppositePlayer)
             }
             
             if oppositePlayer.isAllPersonageAreDead() {
@@ -151,13 +170,20 @@ class Game {
         for i in 0..<player.listOfPersonageSelected.count {
             let personage = player.listOfPersonageSelected[i]
             
+            var text = ""
             if personage.weapon is WeaponAttack{
                 let weaponAttack = personage.weapon as! WeaponAttack
-                print("\(i+1). \(personage.pseudoName!) [Vie : \(personage.life), \(weaponAttack.name) : \(weaponAttack.damage)]")
+                text = "\(i+1). \(personage.pseudoName!) [Vie : \(personage.life), \(weaponAttack.name) : \(weaponAttack.damage)]"
             }else{
                 let weaponCare = personage.weapon as! WeaponCare
-                print("\(i+1). \(personage.pseudoName!) [Vie : \(personage.life), \(weaponCare.name) : \(weaponCare.care)]")
+                text = "\(i+1). \(personage.pseudoName!) [Vie : \(personage.life), \(weaponCare.name) : \(weaponCare.care)]"
             }
+            
+            if(personage.isDead()){
+                text += "(MORT)"
+            }
+            
+            print(text)
         }
     }
     
@@ -286,9 +312,5 @@ class Game {
                 print("Nom invalide")
             }
         }while player.name.count <= 0
-    }
-    
-    func restartGame() -> Void {
-        
     }
 }
