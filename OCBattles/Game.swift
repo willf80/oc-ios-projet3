@@ -66,6 +66,8 @@ class Game {
             print("\nVeillez selectionner un personnage [\(currentPlayerSelected.name)] : ")
             currentPlayerSelected.showTeamListWithDetails()
             
+            
+            //Select current player personage
             var playerPersonageSelectedForAttackOrCare = takeCurrentPlayerPersonage(listOfPersonage: currentPlayerSelected.listOfPersonageSelected)
             if playerPersonageSelectedForAttackOrCare.isDead(){
                 repeat{
@@ -74,10 +76,13 @@ class Game {
                 }while playerPersonageSelectedForAttackOrCare.isDead()
             }
             
+            //Check if we can show weapon suggestion
+            showSuggestion(personage: playerPersonageSelectedForAttackOrCare)
+            
             //Check if is Attacker or Healer
             //--------------------------------------
             //If is Healer, we show current player personage
-            if playerPersonageSelectedForAttackOrCare is Healer{
+            if playerPersonageSelectedForAttackOrCare is PersonageHealer{
                 let personageHealer = playerPersonageSelectedForAttackOrCare as! PersonageHealer
                 
                 //Show player list without Mage
@@ -128,15 +133,85 @@ class Game {
             if oppositePlayer.isAllPersonageAreDead() {
                 print("\n\n=============================")
                 print("l'équipe [\(oppositePlayer.name)] à perdue tous ces personnages !")
+                print("-----------------------------")
                 print("**** Bravo \(currentPlayerSelected.name) ! Vous avez remporté la partie ****")
+                print("**** Statistiques ****")
+                print("**** \(currentPlayerSelected.name) = \(currentPlayerSelected.numberOfLaps) tour(s) ****")
+                print("**** \(oppositePlayer.name) = \(oppositePlayer.numberOfLaps) tour(s) ****")
                 print("=============================")
                 quit = true
+            }else{
+                currentPlayerSelected.numberOfLaps += 1
+                //Toggle player
+                toggleCurrentPlayer()
             }
             
-            //Toggle player
-            toggleCurrentPlayer()
             makePause()
+            
         }while !quit
+    }
+    
+    private func showSuggestion(personage: Personage) -> Void {
+        if Constants.random(max: 1) > 0 {
+            print("Un coffre est disponible. Voulez-vous l'ouvrir ?")
+            print("1 -> Ouvrir le coffre")
+            print("X -> Ne pas utiliser le coffre")
+            print("Votre choix : ")
+            
+            if let response = readLine(), response == "1" {
+                let indexWeapon = Constants.random(max: Constants.WeaponStore.count - 1)
+                var weaponRandom : Weapon?
+                
+                var i = 0
+                for (_, value) in Constants.WeaponStore {
+                    if i == indexWeapon{
+                        weaponRandom = value
+                        break
+                    }
+                    
+                    i += 1
+                }
+                
+                if let weapon = weaponRandom{
+                    var text = "-> Le coffre contient une arme"
+                    
+                    if weapon is WeaponAttack{
+                        let _weapon = weapon as! WeaponAttack
+                        text += " [\(_weapon.name) : \(_weapon.damage)] de type ATTAQUE"
+                    }else{
+                        let _weapon = weapon as! WeaponCare
+                        text += " [\(_weapon.name) : \(_weapon.care)] de type SOIN"
+                    }
+                    
+                    print(text)
+                    
+                    var canGiveWeapon = false
+                    if (personage is PersonageHealer) && (weapon is WeaponCare){
+                        canGiveWeapon = true
+                    }else if (personage is PersonageAttacker) && (weapon is WeaponAttack) {
+                        canGiveWeapon = true
+                    }else{
+                        print("-> Cette arme ne peut être utilisée par votre personnage.")
+                    }
+                    
+                    if canGiveWeapon {
+                        print("Voulez-vous utiliser cette arme ? ")
+                        print("1 -> Utiliser l'arme")
+                        print("X -> Abandonner l'arme")
+                        print("Votre choix : ")
+                        
+                        if let weaponSelectedResponse = readLine(), weaponSelectedResponse == "1" {
+                            personage.weapon = weapon
+                        }else{
+                            print("-> Arme abandonnée !")
+                        }
+                    }
+                }
+                
+            }else{
+                print("-> Coffre non utilisé")
+            }
+        }
     }
     
     private func getTheOppositePlayer() -> Player {
@@ -168,18 +243,6 @@ class Game {
         
         return listOfPersonage[choice - 1]
     }
-    
-//    private func recapitulationPlayersList() -> Void {
-//        print("\nListe des équipes")
-//        print("#############################\n")
-//
-//        print("Equipe \(player1.name)")
-//        player1.showTeamListWithDetails()
-//        print("")
-//
-//        print("Equipe \(player2.name)")
-//        player2.showTeamListWithDetails()
-//    }
     
     private func getCurrentPlayer(currentPlayer: CurrentPlayer) -> Player {
         var player: Player
@@ -231,7 +294,7 @@ class Game {
     private func editPersonageName(personage: Personage) -> Void{
         var nameIsUsed = false
         repeat{
-            print("Veuillez saire le nom de votre personnage : ")
+            print("Veuillez saisire le nom de votre personnage : ")
             if let pseudoName = readLine(){
                 personage.pseudoName = pseudoName.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
                 

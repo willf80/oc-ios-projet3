@@ -16,6 +16,7 @@ enum WeaponID: String{
     case AXE = "AXE"
     case MICROBE = "MICROBE"
     case POISON = "POISON"
+    case POWDER_OF_LIFE = "POWDER_OF_LIFE"
 }
 
 struct Constants {
@@ -25,6 +26,7 @@ struct Constants {
                               WeaponID.CUDGEL.rawValue : WeaponAttack(name: "Gourdin", damage: 8),
                               WeaponID.MICROBE.rawValue : WeaponAttack(name: "Poignard-machette", damage: 17),
                               WeaponID.POISON.rawValue : WeaponAttack(name: "Poison", damage: 13),
+                              WeaponID.POWDER_OF_LIFE.rawValue : WeaponCare(name: "Poudre de vie", care: 15),
                               WeaponID.AXE.rawValue : WeaponAttack(name: "Hache", damage: 15)]
     
     //  Definition of all personages without their pseudoName
@@ -34,7 +36,9 @@ struct Constants {
                PersonageAttacker(name: "Nain", life: 50, weapon: WeaponStore[WeaponID.AXE.rawValue] as! WeaponAttack),
                PersonageAttacker(name: "Microbe", life: 90, weapon: WeaponStore[WeaponID.MICROBE.rawValue] as! WeaponAttack),
                PersonageAttacker(name: "Assain", life: 90, weapon: WeaponStore[WeaponID.POISON.rawValue] as! WeaponAttack),
-               PersonageHealer(name: "Mage", life: 40, weapon: WeaponStore[WeaponID.CARE_SHEET.rawValue] as! WeaponCare)]
+               PersonageHealer(name: "Mage", life: 40, weapon: WeaponStore[WeaponID.CARE_SHEET.rawValue] as! WeaponCare),
+               PersonageHealer(name: "Guerisseur", life: 60, weapon: WeaponStore[WeaponID.POWDER_OF_LIFE.rawValue] as! WeaponCare)
+        ]
     }
     
     //  Read integer line
@@ -46,5 +50,9 @@ struct Constants {
         }
         
         return input
+    }
+    
+    static func random(max: Int) -> Int {
+        return Int(arc4random_uniform(UInt32(max + 1)))
     }
 }

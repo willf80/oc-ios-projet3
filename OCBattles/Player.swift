@@ -14,9 +14,11 @@ enum CurrentPlayer {
 class Player {
     var name : String
     var listOfPersonageSelected = [Personage]()
+    var numberOfLaps: Int
     
     init() {
-        self.name = ""
+        name = ""
+        numberOfLaps = 0
     }
     
     func getPersonageWithoutHealer() -> [Personage] {
