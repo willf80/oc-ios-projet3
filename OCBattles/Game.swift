@@ -13,18 +13,21 @@ class Game {
     //  Player1 is the first player start a game
     private var currentPlayer = CurrentPlayer.Player1
     
+    //Define the two players of the game
     private var player1 = Player()
     private var player2 = Player()
     
     //  Indicates whether the game is over or not
     private var quit = false
     
+    //Initialize players data and set player1 current player
     private func initialize() -> Void {
         player1 = Player()
         player2 = Player()
         currentPlayer = CurrentPlayer.Player1
     }
     
+    //  Show credits option menu
     func credits() -> Void {
         print("Développé par WILLY FALONE KOUADIO.")
         print("Mentoré par Jean-Michel ZARAGOZA\n")
@@ -50,10 +53,12 @@ class Game {
         goInCombat()
     }
     
+    //This make game in pause
     private func makePause() -> Void{
         print("\nAppuyer sur entrer pour continuer...")
         _ = readLine() //Just to put application in pause
     }
+    
     
     private func goInCombat() -> Void {
         //  Loop of game
@@ -220,6 +225,8 @@ class Game {
         }
     }
     
+    //Get the opposite player.
+    //If current player is player1, it return player2
     private func getTheOppositePlayer() -> Player {
         if currentPlayer == .Player1{
             return player2
@@ -228,6 +235,9 @@ class Game {
         }
     }
     
+    //Is user to change the current player
+    //If current player is player1, when we call this function
+    //it return player2
     private func toggleCurrentPlayer() -> Void {
         if currentPlayer == .Player1{
             currentPlayer = .Player2
