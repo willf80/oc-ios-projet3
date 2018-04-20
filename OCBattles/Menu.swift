@@ -44,7 +44,8 @@ class Menu {
                 game.startNewGame()
                 break
             case 2:
-                //  TODO: Game credits
+                //Game credits
+                game.credits()
                 break
                 
             case 3:

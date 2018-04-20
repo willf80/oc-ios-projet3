@@ -25,6 +25,12 @@ class Game {
         currentPlayer = CurrentPlayer.Player1
     }
     
+    func credits() -> Void {
+        print("Développé par WILLY FALONE KOUADIO.")
+        print("Mentoré par Jean-Michel ZARAGOZA\n")
+        print("--- Merci à toute l'équipe OpenClassrooms ! ---")
+    }
+    
     func startNewGame() -> Void {
         initialize()
         
