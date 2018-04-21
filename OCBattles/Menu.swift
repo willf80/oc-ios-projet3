@@ -19,7 +19,7 @@ class Menu {
         
         //  Creating the game menu
         repeat{
-            print("###########- Bienvenue ! -###########")
+            print("########### Bienvenue ! ###########")
             print("Veuillez selectionner l'action à effectuer.")
             print("1. Nouvelle partie")
             print("2. Crédits")

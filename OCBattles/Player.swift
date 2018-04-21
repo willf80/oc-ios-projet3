@@ -9,6 +9,18 @@
 enum CurrentPlayer {
     case Player1
     case Player2
+    
+    //Is user to change the current player
+    //If current player is player1, when we call this function
+    //it return player2
+    mutating func nextPlayer() {
+        switch self {
+        case .Player1:
+            self = .Player2
+        case .Player2:
+            self = .Player1
+        }
+    }
 }
 
 class Player {

@@ -11,7 +11,7 @@ import Foundation
 class Game {
     
     //  Player1 is the first player start a game
-    private var currentPlayer = CurrentPlayer.Player1
+    private var currentPlayerEnum = CurrentPlayer.Player1
     
     //Define the two players of the game
     private var player1 = Player()
@@ -24,14 +24,16 @@ class Game {
     private func initialize() -> Void {
         player1 = Player()
         player2 = Player()
-        currentPlayer = CurrentPlayer.Player1
+        currentPlayerEnum = CurrentPlayer.Player1
     }
     
     //  Show credits option menu
     func credits() -> Void {
-        print("Développé par WILLY FALONE KOUADIO.")
-        print("Mentoré par Jean-Michel ZARAGOZA\n")
+        print("\n=================== CREDITS ===================")
+        print("Développé par WILLY FALONE KOUADIO")
+        print("Mentoré par Jean-Michel ZARAGOZA")
         print("--- Merci à toute l'équipe OpenClassrooms ! ---")
+        print("===============================================\n\n")
     }
     
     func startNewGame() -> Void {
@@ -67,7 +69,7 @@ class Game {
         //  - One of the two players wins the game
         //  - One of the players decides to stop the game
         repeat {
-            let currentPlayerSelected = getCurrentPlayer(currentPlayer: self.currentPlayer)
+            let currentPlayerSelected = getCurrentPlayer(currentPlayer: self.currentPlayerEnum)
             let oppositePlayer = getTheOppositePlayer()
             
             //Give the list of the characters of the opposing team with the useful properties, so that the player can make an informed choice!
@@ -154,7 +156,7 @@ class Game {
             }else{
                 currentPlayerSelected.numberOfLaps += 1
                 //Toggle player
-                toggleCurrentPlayer()
+                currentPlayerEnum.nextPlayer()
             }
             
             makePause()
@@ -228,24 +230,13 @@ class Game {
     //Get the opposite player.
     //If current player is player1, it return player2
     private func getTheOppositePlayer() -> Player {
-        if currentPlayer == .Player1{
+        if currentPlayerEnum == .Player1{
             return player2
         }else{
             return player1
         }
     }
-    
-    //Is user to change the current player
-    //If current player is player1, when we call this function
-    //it return player2
-    private func toggleCurrentPlayer() -> Void {
-        if currentPlayer == .Player1{
-            currentPlayer = .Player2
-        }else{
-            currentPlayer = .Player1
-        }
-    }
-    
+
     private func takeCurrentPlayerPersonage(listOfPersonage: [Personage]) -> Personage {
         var choice = 0
         repeat{
@@ -282,12 +273,21 @@ class Game {
         
         //  This list is used to handle player personage selection
         //  We will remove the personage selected
-        var listOfPersonageToSelection = [Personage]()
+        var listOfPersonageToSelection = Constants.getAllPersonageStore()
         
         var index = 0
-        for personage in Constants.getAllPersonageStore() {
-            print("\(index + 1). \(personage.name)")
-            listOfPersonageToSelection += [personage]
+        for personage in listOfPersonageToSelection {
+            
+            var text = ""
+            if personage.weapon is WeaponAttack{
+                let weaponAttack = personage.weapon as! WeaponAttack
+                text = "\(index+1). \(personage.name) [Vie : \(personage.life), \(weaponAttack.name) : \(weaponAttack.damage)]"
+            }else{
+                let weaponCare = personage.weapon as! WeaponCare
+                text = "\(index+1). \(personage.name) [Vie : \(personage.life), \(weaponCare.name) : \(weaponCare.care)]"
+            }
+            
+            print(text)
             index += 1
         }
         
